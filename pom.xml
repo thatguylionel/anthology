@@ -13,29 +13,32 @@
     </build>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <javaee.api.version>8.0</javaee.api.version>
+        <!-- Project Specific Properties -->
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+        <java.version>1.8</java.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <java.version>1.8</java.version>
-        <javaee.api>7.0</javaee.api>
-        <imgscalr.version>4.2</imgscalr.version>
-        <failOnMissingWebXml>false</failOnMissingWebXml>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- External Libraries-->
+        <version.javaee.api>7.0</version.javaee.api>
+        <version.fasterxml>2.9.6</version.fasterxml>
+        <version.imgscalr>4.2</version.imgscalr>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
-            <version>${javaee.api}</version>
+            <version>${version.javaee.api}</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.imgscalr</groupId>
             <artifactId>imgscalr-lib</artifactId>
-            <version>${imgscalr.version}</version>
+            <version>${version.imgscalr}</version>
         </dependency>
     </dependencies>
 </project>
