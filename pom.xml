@@ -8,6 +8,9 @@
     <artifactId>anthology</artifactId>
     <version>0.1</version>
     <packaging>war</packaging>
+    <build>
+        <finalName>anthology</finalName>
+    </build>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -15,10 +18,10 @@
         <javaee.api.version>8.0</javaee.api.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-
         <java.version>1.8</java.version>
         <javaee.api>7.0</javaee.api>
         <imgscalr.version>4.2</imgscalr.version>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
     </properties>
 
     <dependencies>
