@@ -15,8 +15,9 @@ import java.util.logging.Logger;
 public class ImageResizer {
     private static final Logger LOGGER = Logger.getLogger(ImageResizer.class.getName());
 
-    public static void listFilesForFolder(String readInPath, String writeOutPath, int height, int width) {
+    public static boolean listFilesForFolder(String readInPath, String writeOutPath, int height, int width) {
         File folder = new File(readInPath);
+        boolean isSuccessful = true;
         for (final File fileEntry : Objects.requireNonNull(folder.listFiles())) {
             if (fileEntry.isDirectory()) {
                 listFilesForFolder(readInPath, writeOutPath, height, width);
@@ -26,23 +27,27 @@ public class ImageResizer {
                 } catch (IOException e) {
                     LOGGER.log(Level.WARNING, "IMG " + fileEntry.getName() + " did not convert successfully.");
                     LOGGER.log(Level.WARNING, e.getMessage());
+                    isSuccessful = false;
                 }
             }
         }
+        return isSuccessful;
     }
 
 
     private static void resize(String readPath, String name, int height, int width, String writePath) throws IOException {
         String outputFormat = "jpg";
-        File icon = new File(readPath + name);
-        BufferedImage originalImage = ImageIO.read(icon);
-        originalImage = Scalr.resize(originalImage, Scalr.Method.ULTRA_QUALITY, Scalr.Mode.FIT_TO_WIDTH, width, height);
+        if(name.contains(outputFormat)) {
+            File icon = new File(readPath + name);
+            BufferedImage originalImage = ImageIO.read(icon);
+            originalImage = Scalr.resize(originalImage, Scalr.Method.ULTRA_QUALITY, Scalr.Mode.FIT_TO_WIDTH, width, height);
 
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        ImageIO.write(originalImage, outputFormat, byteArrayOutputStream);
-        byteArrayOutputStream.flush();
-        FileOutputStream fos = new FileOutputStream(writePath + name + "_backup." + outputFormat);
-        fos.write(byteArrayOutputStream.toByteArray());
-        byteArrayOutputStream.close();
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            ImageIO.write(originalImage, outputFormat, byteArrayOutputStream);
+            byteArrayOutputStream.flush();
+            FileOutputStream fos = new FileOutputStream(writePath + name + "_backup." + outputFormat);
+            fos.write(byteArrayOutputStream.toByteArray());
+            byteArrayOutputStream.close();
+        }
     }
 }

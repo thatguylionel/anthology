@@ -21,12 +21,20 @@ public class AnthologyController {
         return "OK";
     }
 
+    /**
+     * This service is responsible for image rescaling, taking a directory of images and converting them to a ratio of
+     * 1024x768.
+     * TODO: Add more comprehensive documentation
+     *
+     * @param headers
+     * @param filePojo
+     * @return Boolean result if operation completed successfully.
+     */
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     @Path("/rescaleImages")
     public boolean convertImages(@Context HttpHeaders headers, FilePojo filePojo) {
-        listFilesForFolder( filePojo.getReadFromDirectory(), filePojo.getWriteToDirectory(), 1024, 768);
-        return true;
+        return listFilesForFolder(filePojo.getReadFromDirectory(), filePojo.getWriteToDirectory(), 1024, 768);
     }
 
 }
